@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="measurement"
+            type="pl.depta.rafal.fuelconsumpction.model.Measurement" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dateFormat="@{measurement.date}" />
+
+            <TextView
+                android:id="@+id/measurement_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date"
+                android:text="@{@string/measurement_distance(measurement.distance)}" />
+
+            <TextView
+                android:id="@+id/measurement_fuel_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/measurement_distance"
+                android:text="@{@string/measurement_fuel_spend(measurement.fuelSpend)}" />
+
+            <TextView
+                android:id="@+id/measurement_fuel_consumption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/measurement_fuel_price"
+                android:text="@{@string/measurement_fuel_consumption(measurement.fuelConsumption)}" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

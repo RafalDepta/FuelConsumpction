@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="measurement_distance">Distance: %.1f</string>
+    <string name="measurement_fuel_spend">Fuel spend: %.2f</string>
+    <string name="measurement_fuel_consumption">Fuel consumption: %.2f</string>
+</resources>
