@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FuelConsumpction</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="loading_measurements">Wczytywanie pomiarów</string>
+    <string name="title_activity_add_measurement">Dodaj pomiar</string>
+    <string name="measurement_distance">Dystans: %.1f</string>
+    <string name="measurement_fuel_spend">Zużyte paliwo: %.2f</string>
+    <string name="measurement_fuel_consumption">Spalanie: %.2f</string>
+</resources>

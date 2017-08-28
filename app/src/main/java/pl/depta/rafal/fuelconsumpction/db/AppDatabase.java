@@ -12,26 +12,23 @@ import java.util.Date;
 import pl.depta.rafal.fuelconsumpction.db.dao.MeasurementDao;
 import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
 
-/**
- * Created by Rafał Depta on 23.08.2017.
- */
 
 @Database(entities = {MeasurementEntity.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
+    private static final String DATABASE_NAME = "measurement_db";
 
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "measurement_db")
+                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                             .addMigrations(MIGRATION_1_2)
                             .build();
-
-            //DatabaseCreator.getInstance().fillDatabase();
         }
         return INSTANCE;
     }
+
     private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {

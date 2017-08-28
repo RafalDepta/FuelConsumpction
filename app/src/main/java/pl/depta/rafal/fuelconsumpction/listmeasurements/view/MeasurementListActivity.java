@@ -9,39 +9,42 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
-import butterknife.ButterKnife;
 import pl.depta.rafal.fuelconsumpction.R;
 import pl.depta.rafal.fuelconsumpction.addmeasurement.view.AddMeasurement;
 import pl.depta.rafal.fuelconsumpction.databinding.MeasurementListActivityBinding;
+import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
 import pl.depta.rafal.fuelconsumpction.listmeasurements.viewmodel.MeasurementListViewModel;
 
-public class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner {
+class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner {
 
     public static final String TAG = "MeasurementListFragment";
 
     private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-    private MeasurementListActivityBinding mBinding;
     private MeasurementAdapter mMeasurementAdapter;
     private MeasurementListViewModel measurementViewModel;
-    private FloatingActionButton fab;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.measurement_list_activity);
+
+        MeasurementListActivityBinding mBinding = DataBindingUtil.setContentView(this, R.layout.measurement_list_activity);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = findViewById(R.id.add_measurement);
+        fab.setOnClickListener(view -> startActivity(new Intent(MeasurementListActivity.this, AddMeasurement.class)));
+
         mMeasurementAdapter = new MeasurementAdapter();
         mBinding.measurementList.setAdapter(mMeasurementAdapter);
 
-        fab = findViewById(R.id.add_measurement);
-        fab.setOnClickListener(view -> startActivity(new Intent(MeasurementListActivity.this, AddMeasurement.class)));
+        RecyclerView recyclerView = mBinding.getRoot().findViewById(R.id.measurement_list);
+        initSwipe(recyclerView);
 
         measurementViewModel = ViewModelProviders.of(this).get(MeasurementListViewModel.class);
         subscribeUi(measurementViewModel);
@@ -54,6 +57,19 @@ public class MeasurementListActivity extends AppCompatActivity implements Lifecy
                 mMeasurementAdapter.setMeasurementList(measurementEntities);
             }
         });
+    }
+
+    private void initSwipe(RecyclerView recyclerView) {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback() {
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                measurementViewModel.deleteMeasurement((MeasurementEntity) mMeasurementAdapter.getMeasurementAt(position));
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override

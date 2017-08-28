@@ -11,13 +11,9 @@ import java.util.List;
 
 import pl.depta.rafal.fuelconsumpction.db.converter.DateConverter;
 import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
-import pl.depta.rafal.fuelconsumpction.model.Measurement;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
-/**
- * Created by Rafał Depta on 23.08.2017.
- */
 
 @Dao
 @TypeConverters(DateConverter.class)
@@ -33,5 +29,5 @@ public interface MeasurementDao {
     void insertAll(List<MeasurementEntity> measurements);
 
     @Delete
-    void deleteMesurement (MeasurementEntity measurement);
+    void deleteMeasurement(MeasurementEntity measurement);
 }

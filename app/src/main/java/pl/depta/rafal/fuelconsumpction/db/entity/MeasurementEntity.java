@@ -9,9 +9,6 @@ import java.util.Date;
 import pl.depta.rafal.fuelconsumpction.db.converter.DateConverter;
 import pl.depta.rafal.fuelconsumpction.model.Measurement;
 
-/**
- * Created by Rafał Depta on 23.08.2017.
- */
 
 @Entity
 public class MeasurementEntity implements Measurement {

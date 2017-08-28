@@ -10,7 +10,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -61,6 +69,8 @@ dependencies {
     implementation "com.jakewharton:butterknife-compiler:$butterknife_version"
     implementation "com.jakewharton:butterknife-annotations:$butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+    annotationProcessor "com.jakewharton:butterknife:$butterknife_version"
+    compile "com.jakewharton:butterknife:$butterknife_version"
     // RxJava support for Room
     implementation "android.arch.persistence.room:rxjava2:$arch_version"
 }

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FuelConsumpction.iml" filepath="$PROJECT_DIR$/FuelConsumpction.iml" />
+      <module fileurl="file://C:\Rafal\Projekty\FuelConsumpction\FuelConsumpction.iml" filepath="C:\Rafal\Projekty\FuelConsumpction\FuelConsumpction.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Rafal\Projekty\FuelConsumpction\app\app.iml" filepath="C:\Rafal\Projekty\FuelConsumpction\app\app.iml" />
     </modules>
   </component>
 </project>

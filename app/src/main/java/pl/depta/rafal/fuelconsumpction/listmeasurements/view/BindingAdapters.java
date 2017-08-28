@@ -8,9 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by Rafał Depta on 23.08.2017.
- */
 
 public class BindingAdapters {
     @BindingAdapter("visibleGone")
@@ -20,7 +17,7 @@ public class BindingAdapters {
 
     @BindingAdapter("dateFormat")
     public static void setDate(TextView view, Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
         String stringDate = sdf.format(date);
         view.setText(stringDate);
     }

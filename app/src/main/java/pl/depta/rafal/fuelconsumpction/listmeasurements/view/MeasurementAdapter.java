@@ -14,15 +14,15 @@ import pl.depta.rafal.fuelconsumpction.databinding.MeasurementItemBinding;
 import pl.depta.rafal.fuelconsumpction.model.Measurement;
 
 
-public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.MeasurementViewHolder> {
+class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.MeasurementViewHolder> {
 
     private List<? extends Measurement> mMeasurementList;
 
-    public MeasurementAdapter() {
+    MeasurementAdapter() {
 
     }
 
-    public void setMeasurementList(final List<? extends Measurement> measurementList) {
+    void setMeasurementList(final List<? extends Measurement> measurementList) {
         if (mMeasurementList == null) {
             mMeasurementList = measurementList;
             notifyItemRangeInserted(0, measurementList.size());
@@ -47,17 +47,26 @@ public class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     Measurement measurement = measurementList.get(newItemPosition);
-                    Measurement old = measurementList.get(oldItemPosition);
-                    return measurement.getId() == old.getId()
-                            && Objects.equals(measurement.getDate(), old.getDate())
-                            && Objects.equals(measurement.getDistance(), old.getDistance())
-                            && Objects.equals(measurement.getFuelPrice(), old.getFuelPrice())
-                            && Objects.equals(measurement.getFuelConsumption(), old.getFuelConsumption());
+                    Measurement old;
+                    if (oldItemPosition >= measurementList.size()) {
+                        return false;
+                    } else {
+                        old = measurementList.get(oldItemPosition);
+                        return measurement.getId() == old.getId()
+                                && Objects.equals(measurement.getDate(), old.getDate())
+                                && Objects.equals(measurement.getDistance(), old.getDistance())
+                                && Objects.equals(measurement.getFuelPrice(), old.getFuelPrice())
+                                && Objects.equals(measurement.getFuelConsumption(), old.getFuelConsumption());
+                    }
                 }
             });
             mMeasurementList = measurementList;
             result.dispatchUpdatesTo(this);
         }
+    }
+
+    Measurement getMeasurementAt(int position) {
+        return mMeasurementList.get(position);
     }
 
     @Override

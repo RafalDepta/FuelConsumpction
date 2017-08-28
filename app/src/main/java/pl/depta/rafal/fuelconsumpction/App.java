@@ -4,9 +4,6 @@ import android.app.Application;
 
 import pl.depta.rafal.fuelconsumpction.db.AppDatabase;
 
-/**
- * Created by Rafał Depta on 23.08.2017.
- */
 
 public class App extends Application {
 
