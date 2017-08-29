@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 import java.util.Objects;
 

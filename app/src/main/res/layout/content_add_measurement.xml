@@ -4,35 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".addmeasurement.view.AddMeasurement"
     tools:showIn="@layout/activity_add_measurement">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/measurement_distance"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Distance" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/measurement_fuel_spend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Fuel spend" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/distance_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/measurement_fuel_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Fuel price" />
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/measurement_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_distance"
+                    android:inputType="numberDecimal" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/fuel_spend_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/measurement_fuel_spend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_fuel_spend"
+                    android:inputType="numberDecimal" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/fuel_price_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/measurement_fuel_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_fuel_price"
+                    android:inputType="numberDecimal" />
+            </android.support.design.widget.TextInputLayout>
 
 
-    </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -19,7 +19,7 @@ import pl.depta.rafal.fuelconsumpction.databinding.MeasurementListActivityBindin
 import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
 import pl.depta.rafal.fuelconsumpction.listmeasurements.viewmodel.MeasurementListViewModel;
 
-class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner {
+public class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner {
 
     public static final String TAG = "MeasurementListFragment";
 

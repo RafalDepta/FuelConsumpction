@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 
 import pl.depta.rafal.fuelconsumpction.App;

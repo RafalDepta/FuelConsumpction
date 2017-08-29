@@ -3,7 +3,15 @@
     <string name="action_settings">Settings</string>
     <string name="loading_measurements">Measurements loading…</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="measurement_distance">Distance: %.1f</string>
+    <string name="measurement_fuel_spend">Fuel spend: %.2f</string>
+    <string name="measurement_fuel_consumption">Combustion: %.2fL/100km</string>
+
+    <string name="hint_fuel_spend">Fuel spend</string>
+    <string name="hint_fuel_price">Fuel price</string>
+    <string name="hint_distance">Distance</string>
+
+
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_add_measurement">AddMeasurement</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>

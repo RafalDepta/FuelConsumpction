@@ -16,7 +16,7 @@ public class MeasurementEntity implements Measurement {
     @PrimaryKey(autoGenerate = true)
     public int id;
     @TypeConverters(DateConverter.class)
-    private Date date;
+    private Date date = new Date();
     private float distance;
     private float fuelPrice;
     private float fuelConsumption;
@@ -73,12 +73,5 @@ public class MeasurementEntity implements Measurement {
     }
 
     public MeasurementEntity() {
-    }
-
-    public MeasurementEntity(Measurement measurement) {
-        this.date = measurement.getDate();
-        this.distance = measurement.getDistance();
-        this.fuelPrice = measurement.getFuelPrice();
-        this.fuelConsumption = measurement.getFuelConsumption();
     }
 }
