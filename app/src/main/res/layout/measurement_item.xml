@@ -47,6 +47,7 @@
                 android:id="@+id/measurement_fuel_consumption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_below="@id/measurement_fuel_price"
                 android:text="@{@string/measurement_fuel_consumption(measurement.fuelConsumption)}" />
         </RelativeLayout>
