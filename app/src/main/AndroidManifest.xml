@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".addmeasurement.view.AddMeasurement"
+            android:name=".ui.addmeasurement.view.AddMeasurement"
             android:label="@string/title_activity_add_measurement"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -1,8 +1,7 @@
-package pl.depta.rafal.fuelconsumpction.addmeasurement.viewmodel;
+package pl.depta.rafal.fuelconsumpction.ui.addmeasurement.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.regex.Matcher;

@@ -1,4 +1,4 @@
-package pl.depta.rafal.fuelconsumpction.listmeasurements.view;
+package pl.depta.rafal.fuelconsumpction.ui.listmeasurements.view;
 
 import android.support.v7.util.DiffUtil;
 

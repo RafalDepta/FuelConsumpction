@@ -1,4 +1,4 @@
-package pl.depta.rafal.fuelconsumpction.listmeasurements.viewmodel;
+package pl.depta.rafal.fuelconsumpction.ui.listmeasurements.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;

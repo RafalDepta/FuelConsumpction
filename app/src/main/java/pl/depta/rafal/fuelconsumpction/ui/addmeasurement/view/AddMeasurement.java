@@ -1,4 +1,4 @@
-package pl.depta.rafal.fuelconsumpction.addmeasurement.view;
+package pl.depta.rafal.fuelconsumpction.ui.addmeasurement.view;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
@@ -9,16 +9,14 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.depta.rafal.fuelconsumpction.R;
-import pl.depta.rafal.fuelconsumpction.addmeasurement.viewmodel.AddMeasurementViewModel;
+import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.viewmodel.AddMeasurementViewModel;
 
 public class AddMeasurement extends AppCompatActivity implements LifecycleRegistryOwner {
 

@@ -1,4 +1,4 @@
-package pl.depta.rafal.fuelconsumpction.listmeasurements.view;
+package pl.depta.rafal.fuelconsumpction.ui.listmeasurements.view;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
@@ -14,10 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import pl.depta.rafal.fuelconsumpction.R;
-import pl.depta.rafal.fuelconsumpction.addmeasurement.view.AddMeasurement;
 import pl.depta.rafal.fuelconsumpction.databinding.MeasurementListActivityBinding;
 import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
-import pl.depta.rafal.fuelconsumpction.listmeasurements.viewmodel.MeasurementListViewModel;
+import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.view.AddMeasurement;
+import pl.depta.rafal.fuelconsumpction.ui.listmeasurements.viewmodel.MeasurementListViewModel;
 
 public class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner {
 
