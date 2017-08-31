@@ -5,6 +5,7 @@ import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,19 +22,13 @@ import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.viewmodel.AddMeasuremen
 public class AddMeasurement extends AppCompatActivity implements LifecycleRegistryOwner {
 
     @BindView(R.id.measurement_distance)
-    EditText measurementDistance;
+    TextInputEditText measurementDistance;
     @BindView(R.id.measurement_fuel_price)
-    EditText measurementFuelPrice;
+    TextInputEditText measurementFuelPrice;
     @BindView(R.id.measurement_fuel_spend)
-    EditText measurementFuelSpend;
+    TextInputEditText measurementFuelSpend;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.distance_input_layout)
-    TextInputLayout distanceInputLayout;
-    @BindView(R.id.fuel_spend_input_layout)
-    TextInputLayout fuelSpendInputLayout;
-    @BindView(R.id.fuel_price_input_layout)
-    TextInputLayout fuelPriceInputLayout;
 
     private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private AddMeasurementViewModel viewModel;
@@ -53,7 +48,6 @@ public class AddMeasurement extends AppCompatActivity implements LifecycleRegist
         fab.setOnClickListener(view -> saveMeasurement());
         measurementFuelPrice.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) saveMeasurement();
-
             return false;
         });
     }
