@@ -15,14 +15,20 @@ import pl.depta.rafal.fuelconsumpction.R;
 
 abstract class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
-    private Drawable deleteIcon = ContextCompat.getDrawable(App.getApp(), R.drawable.ic_delete_white);
-    private int intrinsicWidth = deleteIcon.getIntrinsicWidth();
-    private int intrinsicHeight = deleteIcon.getIntrinsicHeight();
-    private ColorDrawable background = new ColorDrawable();
-    private int backgroundColor = Color.parseColor("#f44336");
+    private Drawable deleteIcon;
+    private int intrinsicWidth;
+    private int intrinsicHeight;
+    private ColorDrawable background;
+    private int backgroundColor;
 
     SwipeToDeleteCallback() {
         super(0, ItemTouchHelper.LEFT);
+
+        deleteIcon = ContextCompat.getDrawable(App.getApp(), R.drawable.ic_delete_white);
+        backgroundColor = ContextCompat.getColor(App.getApp(), R.color.color_delete_list_item);
+        intrinsicWidth = deleteIcon.getIntrinsicWidth();
+        intrinsicHeight = deleteIcon.getIntrinsicHeight();
+        background = new ColorDrawable();
     }
 
     @Override
