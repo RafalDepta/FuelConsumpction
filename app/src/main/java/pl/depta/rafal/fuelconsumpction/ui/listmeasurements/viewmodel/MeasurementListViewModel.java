@@ -4,8 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
 
 import pl.depta.rafal.fuelconsumpction.App;
@@ -17,13 +15,19 @@ public class MeasurementListViewModel extends ViewModel {
 
     private LiveData<List<MeasurementEntity>> measurementList;
     private AppDatabase database;
+    private MeasurementEntity deletedMeasurement;
 
     public LiveData<List<MeasurementEntity>> getMeasurementList() {
         return measurementList;
     }
 
     public void deleteMeasurement(MeasurementEntity measurementEntity) {
+        deletedMeasurement = measurementEntity;
         new DeleteMeasurement(database).execute(measurementEntity);
+    }
+
+    public void restoreMeasurement() {
+        new InsertMeasurement(database).execute(deletedMeasurement);
     }
 
     public MeasurementListViewModel() {
@@ -45,5 +49,22 @@ public class MeasurementListViewModel extends ViewModel {
             return null;
         }
     }
+
+    private static class InsertMeasurement extends AsyncTask<MeasurementEntity, Void, Void> {
+
+        private AppDatabase db;
+
+        InsertMeasurement(AppDatabase appDatabase) {
+            db = appDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(final MeasurementEntity... params) {
+            db.measurementDao().insertMeasurement(params[0]);
+            return null;
+        }
+
+    }
+
 
 }

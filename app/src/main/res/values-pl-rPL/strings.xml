@@ -7,4 +7,6 @@
     <string name="measurement_distance">Dystans: %.1f</string>
     <string name="measurement_fuel_spend">Zużyte paliwo: %.2f</string>
     <string name="measurement_fuel_consumption">Spalanie: %.2fL/100km</string>
+    <string name="snack_msg_delete">Element został usunięty</string>
+    <string name="snack_action_restore">Przywróć</string>
 </resources>

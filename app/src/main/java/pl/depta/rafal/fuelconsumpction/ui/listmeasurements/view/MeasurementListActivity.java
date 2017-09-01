@@ -8,6 +8,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,13 +27,13 @@ public class MeasurementListActivity extends AppCompatActivity implements Lifecy
     private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private MeasurementAdapter mMeasurementAdapter;
     private MeasurementListViewModel measurementViewModel;
-
+    private MeasurementListActivityBinding mBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MeasurementListActivityBinding mBinding = DataBindingUtil.setContentView(this, R.layout.measurement_list_activity);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.measurement_list_activity);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,11 +66,17 @@ public class MeasurementListActivity extends AppCompatActivity implements Lifecy
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
                 measurementViewModel.deleteMeasurement((MeasurementEntity) mMeasurementAdapter.getMeasurementAt(position));
+                showDeleteShackBar();
             }
         };
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    private void showDeleteShackBar() {
+        Snackbar.make(mBinding.getRoot(), R.string.snack_msg_delete, Snackbar.LENGTH_SHORT)
+                .setAction(R.string.snack_action_restore, view -> measurementViewModel.restoreMeasurement()).show();
     }
 
     @Override
