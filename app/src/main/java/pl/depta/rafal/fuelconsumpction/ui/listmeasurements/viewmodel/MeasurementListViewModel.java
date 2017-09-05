@@ -21,6 +21,12 @@ public class MeasurementListViewModel extends ViewModel {
         return measurementList;
     }
 
+    public MeasurementListViewModel() {
+
+        database = App.getApp().getDatabase();
+        measurementList = database.measurementDao().getAllMeasurement();
+    }
+
     public void deleteMeasurement(MeasurementEntity measurementEntity) {
         deletedMeasurement = measurementEntity;
         new DeleteMeasurement(database).execute(measurementEntity);
@@ -28,12 +34,6 @@ public class MeasurementListViewModel extends ViewModel {
 
     public void restoreMeasurement() {
         new InsertMeasurement(database).execute(deletedMeasurement);
-    }
-
-    public MeasurementListViewModel() {
-
-        database = App.getApp().getDatabase();
-        measurementList = database.measurementDao().getAllMeasurement();
     }
 
     private static class DeleteMeasurement extends AsyncTask<MeasurementEntity, Void, Void> {

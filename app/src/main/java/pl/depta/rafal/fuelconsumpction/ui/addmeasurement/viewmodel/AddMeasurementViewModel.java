@@ -1,5 +1,6 @@
 package pl.depta.rafal.fuelconsumpction.ui.addmeasurement.viewmodel;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -25,15 +26,23 @@ public class AddMeasurementViewModel extends ViewModel {
         database = App.getApp().getDatabase();
     }
 
-    public void addMeasurement(String distance, String fuelSpend, String fuelPrice) {
+    public void addMeasurement(String distance, String fuelSpend, String fuelPrice, int id) {
 
         MeasurementEntity measurementEntity = new MeasurementEntity();
+
+        if (id != -1)
+            measurementEntity.setId(id);
+
         measurementEntity.setDistance(convertToFloat(distance));
         measurementEntity.setFuelPrice(convertToFloat(fuelPrice));
         measurementEntity.setFuelSpend(convertToFloat(fuelSpend));
 
         calculateFuelConsumption(measurementEntity);
         insertMeasurement(measurementEntity);
+    }
+
+    public LiveData<MeasurementEntity> getMeasurement(int id) {
+        return database.measurementDao().getMeasurement(id);
     }
 
     private void insertMeasurement(MeasurementEntity measurementEntity) {
@@ -74,7 +83,21 @@ public class AddMeasurementViewModel extends ViewModel {
             db.measurementDao().insertMeasurement(params[0]);
             return null;
         }
+    }
 
+    private static class SelectAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private AppDatabase db;
+
+        SelectAsyncTask(AppDatabase appDatabase) {
+            db = appDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(final Integer... params) {
+            db.measurementDao().getMeasurement(params[0]);
+            return null;
+        }
     }
 
 

@@ -3,91 +3,93 @@ package pl.depta.rafal.fuelconsumpction.ui.addmeasurement.view;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import pl.depta.rafal.fuelconsumpction.R;
+import pl.depta.rafal.fuelconsumpction.databinding.ActivityAddMeasurementBinding;
 import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.viewmodel.AddMeasurementViewModel;
 
 public class AddMeasurement extends AppCompatActivity implements LifecycleRegistryOwner {
 
-    @BindView(R.id.measurement_distance)
+/*    @BindView(R.id.measurement_distance)
     TextInputEditText measurementDistance;
     @BindView(R.id.measurement_fuel_price)
     TextInputEditText measurementFuelPrice;
     @BindView(R.id.measurement_fuel_spend)
     TextInputEditText measurementFuelSpend;
     @BindView(R.id.fab)
-    FloatingActionButton fab;
+    FloatingActionButton fab;*/
+
+    public static final String MEASUREMENT_BUNDLE = "measurement_bundle";
 
     private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
     private AddMeasurementViewModel viewModel;
+    private ActivityAddMeasurementBinding mBinding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_measurement);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_measurement);
 
-        ButterKnife.bind(this);
+        setSupportActionBar(mBinding.toolbar);
+        //ButterKnife.bind(this);
 
         viewModel = ViewModelProviders.of(this).get(AddMeasurementViewModel.class);
 
-        fab.setOnClickListener(view -> saveMeasurement());
-        measurementFuelPrice.setOnEditorActionListener((textView, i, keyEvent) -> {
-            if (i == EditorInfo.IME_ACTION_DONE) saveMeasurement();
+        int measurementId = getIntent().getIntExtra(MEASUREMENT_BUNDLE, -1);
+        if (measurementId != -1) {
+            viewModel.getMeasurement(measurementId).observe(this, measurementEntity -> mBinding.setMeasurement(measurementEntity));
+        }
+
+        mBinding.fab.setOnClickListener(view -> saveMeasurement(measurementId));
+        mBinding.measurementFuelPrice.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) saveMeasurement(measurementId);
             return false;
         });
     }
 
-    private void saveMeasurement() {
+    private void saveMeasurement(int id) {
 
-        measurementDistance.setError(null);
-        measurementFuelPrice.setError(null);
-        measurementFuelSpend.setError(null);
+        mBinding.measurementDistance.setError(null);
+        mBinding.measurementFuelPrice.setError(null);
+        mBinding.measurementFuelSpend.setError(null);
 
-        String distance = measurementDistance.getText().toString();
-        String fuelSpend = measurementFuelSpend.getText().toString();
-        String fuelPrice = measurementFuelPrice.getText().toString();
+        String distance = mBinding.measurementDistance.getText().toString();
+        String fuelSpend = mBinding.measurementFuelSpend.getText().toString();
+        String fuelPrice = mBinding.measurementFuelPrice.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         if (TextUtils.isEmpty(distance)) {
-            measurementDistance.setError("Fill section");
-            focusView = measurementDistance;
+            mBinding.measurementDistance.setError("Fill section");
+            focusView = mBinding.measurementDistance;
             cancel = true;
         } else if (!viewModel.isTextValid(distance)) {
-            measurementDistance.setError("Wrong data");
-            focusView = measurementDistance;
+            mBinding.measurementDistance.setError("Wrong data");
+            focusView = mBinding.measurementDistance;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(fuelSpend)) {
-            measurementFuelSpend.setError("Fill section");
-            focusView = measurementFuelSpend;
+            mBinding.measurementFuelSpend.setError("Fill section");
+            focusView = mBinding.measurementFuelSpend;
             cancel = true;
         } else if (!viewModel.isTextValid(fuelSpend)) {
-            measurementFuelSpend.setError("Wrong data");
-            focusView = measurementFuelSpend;
+            mBinding.measurementFuelSpend.setError("Wrong data");
+            focusView = mBinding.measurementFuelSpend;
             cancel = true;
         }
 
         if (!viewModel.isTextValid(fuelPrice)) {
-            measurementFuelPrice.setError("Wrong data");
-            focusView = measurementFuelPrice;
+            mBinding.measurementFuelPrice.setError("Wrong data");
+            focusView = mBinding.measurementFuelPrice;
             cancel = true;
         }
 
@@ -96,11 +98,9 @@ public class AddMeasurement extends AppCompatActivity implements LifecycleRegist
             // form field with an error.
             focusView.requestFocus();
         } else {
-            viewModel.addMeasurement(distance, fuelSpend, fuelPrice);
+            viewModel.addMeasurement(distance, fuelSpend, fuelPrice, id);
             finish();
         }
-
-
     }
 
     @Override

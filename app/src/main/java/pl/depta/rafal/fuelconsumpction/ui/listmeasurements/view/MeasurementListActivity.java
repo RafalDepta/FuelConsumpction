@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +16,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import pl.depta.rafal.fuelconsumpction.R;
 import pl.depta.rafal.fuelconsumpction.databinding.MeasurementListActivityBinding;
 import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
+import pl.depta.rafal.fuelconsumpction.model.Measurement;
 import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.view.AddMeasurement;
 import pl.depta.rafal.fuelconsumpction.ui.listmeasurements.viewmodel.MeasurementListViewModel;
 
-public class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner {
+public class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner, OnItemClickListener {
 
     public static final String TAG = "MeasurementListFragment";
 
@@ -38,10 +38,9 @@ public class MeasurementListActivity extends AppCompatActivity implements Lifecy
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.add_measurement);
-        fab.setOnClickListener(view -> startActivity(new Intent(MeasurementListActivity.this, AddMeasurement.class)));
+        mBinding.fabAddMeasurement.setOnClickListener(view -> startActivity(new Intent(MeasurementListActivity.this, AddMeasurement.class)));
 
-        mMeasurementAdapter = new MeasurementAdapter();
+        mMeasurementAdapter = new MeasurementAdapter(this);
         mBinding.measurementList.setAdapter(mMeasurementAdapter);
 
         RecyclerView recyclerView = mBinding.getRoot().findViewById(R.id.measurement_list);
@@ -82,5 +81,13 @@ public class MeasurementListActivity extends AppCompatActivity implements Lifecy
     @Override
     public LifecycleRegistry getLifecycle() {
         return lifecycleRegistry;
+    }
+
+
+    @Override
+    public void onItemClick(Measurement entity) {
+        Intent intent = new Intent(this, AddMeasurement.class);
+        intent.putExtra(AddMeasurement.MEASUREMENT_BUNDLE, entity.getId());
+        startActivity(intent);
     }
 }

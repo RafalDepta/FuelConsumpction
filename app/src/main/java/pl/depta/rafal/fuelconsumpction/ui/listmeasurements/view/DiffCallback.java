@@ -1,5 +1,6 @@
 package pl.depta.rafal.fuelconsumpction.ui.listmeasurements.view;
 
+import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
 import java.util.List;
@@ -47,5 +48,18 @@ public class DiffCallback extends DiffUtil.Callback {
                     && Objects.equals(measurement.getFuelPrice(), old.getFuelPrice())
                     && Objects.equals(measurement.getFuelConsumption(), old.getFuelConsumption());
         }
+    }
+
+    @Nullable
+    @Override
+    public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+
+        Measurement oldItem = oldList.get(oldItemPosition);
+        Measurement newItem = newList.get(newItemPosition);
+
+        if (oldItem.getFuelConsumption() != newItem.getFuelConsumption())
+            return newItem;
+        else
+            return super.getChangePayload(oldItemPosition, newItemPosition);
     }
 }

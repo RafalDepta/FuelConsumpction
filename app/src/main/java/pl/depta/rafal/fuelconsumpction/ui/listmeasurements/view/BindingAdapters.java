@@ -1,6 +1,8 @@
 package pl.depta.rafal.fuelconsumpction.ui.listmeasurements.view;
 
 import android.databinding.BindingAdapter;
+import android.support.design.widget.TextInputEditText;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,5 +22,14 @@ public class BindingAdapters {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
         String stringDate = sdf.format(date);
         view.setText(stringDate);
+    }
+
+    @BindingAdapter("toText")
+    public static void convertFloatToText(TextInputEditText view, float number) {
+        try {
+            view.setText(String.valueOf(number));
+        } catch (NumberFormatException e) {
+            Log.d("Binding Adapter", e.getMessage());
+        }
     }
 }

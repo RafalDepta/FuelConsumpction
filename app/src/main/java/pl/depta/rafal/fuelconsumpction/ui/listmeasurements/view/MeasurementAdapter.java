@@ -3,7 +3,9 @@ package pl.depta.rafal.fuelconsumpction.ui.listmeasurements.view;
 import android.databinding.DataBindingUtil;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -11,12 +13,18 @@ import java.util.Objects;
 
 import pl.depta.rafal.fuelconsumpction.R;
 import pl.depta.rafal.fuelconsumpction.databinding.MeasurementItemBinding;
+import pl.depta.rafal.fuelconsumpction.db.entity.MeasurementEntity;
 import pl.depta.rafal.fuelconsumpction.model.Measurement;
 
 
 class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.MeasurementViewHolder> {
 
     private List<? extends Measurement> mMeasurementList;
+    private OnItemClickListener onItemClickListener;
+
+    MeasurementAdapter(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     Measurement getMeasurementAt(int position) {
         return mMeasurementList.get(position);
@@ -40,9 +48,17 @@ class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.Measure
     }
 
     @Override
+    public void onBindViewHolder(MeasurementViewHolder holder, int position, List<Object> payloads) {
+        if (payloads != null && !payloads.isEmpty()) {
+            holder.onBind((Measurement) payloads.get(0));
+        } else {
+            onBindViewHolder(holder, position);
+        }
+    }
+
+    @Override
     public void onBindViewHolder(final MeasurementViewHolder holder, int position) {
-        holder.binding.setMeasurement(mMeasurementList.get(position));
-        holder.binding.executePendingBindings();
+        holder.onBind(mMeasurementList.get(position));
     }
 
     @Override
@@ -56,6 +72,13 @@ class MeasurementAdapter extends RecyclerView.Adapter<MeasurementAdapter.Measure
         MeasurementViewHolder(MeasurementItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(view -> onItemClickListener.onItemClick(binding.getMeasurement()));
         }
+
+        void onBind(Measurement measurement) {
+            binding.setMeasurement(measurement);
+            binding.executePendingBindings();
+        }
+
     }
 }

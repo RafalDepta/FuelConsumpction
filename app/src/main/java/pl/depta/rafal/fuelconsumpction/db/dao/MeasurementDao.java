@@ -22,6 +22,9 @@ public interface MeasurementDao {
     @Query("SELECT * FROM MeasurementEntity")
     LiveData<List<MeasurementEntity>> getAllMeasurement();
 
+    @Query("SELECT * FROM MeasurementEntity WHERE id=:id")
+    LiveData<MeasurementEntity> getMeasurement(int id);
+
     @Insert(onConflict = REPLACE)
     void insertMeasurement(MeasurementEntity measurement);
 
