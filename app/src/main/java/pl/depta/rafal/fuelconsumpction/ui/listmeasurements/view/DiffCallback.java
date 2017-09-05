@@ -41,7 +41,7 @@ public class DiffCallback extends DiffUtil.Callback {
         if (oldItemPosition >= newList.size()) {
             return false;
         } else {
-            old = newList.get(oldItemPosition);
+            old = oldList.get(oldItemPosition);
             return measurement.getId() == old.getId()
                     && Objects.equals(measurement.getDate(), old.getDate())
                     && Objects.equals(measurement.getDistance(), old.getDistance())
