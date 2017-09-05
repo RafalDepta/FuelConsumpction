@@ -6,6 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -30,6 +31,9 @@ public interface MeasurementDao {
 
     @Insert(onConflict = REPLACE)
     void insertAll(List<MeasurementEntity> measurements);
+
+    @Update(onConflict = REPLACE)
+    void updateMeasurement(MeasurementEntity measurement);
 
     @Delete
     void deleteMeasurement(MeasurementEntity measurement);

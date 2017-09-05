@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,15 +31,19 @@ public class AddMeasurementViewModel extends ViewModel {
 
         MeasurementEntity measurementEntity = new MeasurementEntity();
 
-        if (id != -1)
-            measurementEntity.setId(id);
-
         measurementEntity.setDistance(convertToFloat(distance));
         measurementEntity.setFuelPrice(convertToFloat(fuelPrice));
         measurementEntity.setFuelSpend(convertToFloat(fuelSpend));
 
         calculateFuelConsumption(measurementEntity);
-        insertMeasurement(measurementEntity);
+
+        if (id != -1) {
+            measurementEntity.setId(id);
+            updateMeasurement(measurementEntity);
+        } else {
+            measurementEntity.setDate(new Date());
+            insertMeasurement(measurementEntity);
+        }
     }
 
     public LiveData<MeasurementEntity> getMeasurement(int id) {
@@ -47,6 +52,10 @@ public class AddMeasurementViewModel extends ViewModel {
 
     private void insertMeasurement(MeasurementEntity measurementEntity) {
         new InsertAsyncTask(database).execute(measurementEntity);
+    }
+
+    private void updateMeasurement(MeasurementEntity measurementEntity) {
+        new UpdateAsyncTask(database).execute(measurementEntity);
     }
 
     private void calculateFuelConsumption(MeasurementEntity measurementEntity) {
@@ -85,17 +94,17 @@ public class AddMeasurementViewModel extends ViewModel {
         }
     }
 
-    private static class SelectAsyncTask extends AsyncTask<Integer, Void, Void> {
+    private static class UpdateAsyncTask extends AsyncTask<MeasurementEntity, Void, Void> {
 
         private AppDatabase db;
 
-        SelectAsyncTask(AppDatabase appDatabase) {
+        UpdateAsyncTask(AppDatabase appDatabase) {
             db = appDatabase;
         }
 
         @Override
-        protected Void doInBackground(final Integer... params) {
-            db.measurementDao().getMeasurement(params[0]);
+        protected Void doInBackground(final MeasurementEntity... params) {
+            db.measurementDao().updateMeasurement(params[0]);
             return null;
         }
     }
