@@ -35,8 +35,8 @@ android {
 }
 
 ext {
-    arch_version = '1.0.0-alpha9'
-    support_lib_version = '26.0.2'
+    arch_version = '1.0.0-alpha9-1'
+    support_lib_version = '26.1.0'
     butterknife_version = '8.8.1'
 
 }

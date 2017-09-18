@@ -20,7 +20,7 @@ import pl.depta.rafal.fuelconsumpction.model.Measurement;
 import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.view.AddMeasurement;
 import pl.depta.rafal.fuelconsumpction.ui.listmeasurements.viewmodel.MeasurementListViewModel;
 
-public class MeasurementListActivity extends AppCompatActivity implements LifecycleRegistryOwner, OnItemClickListener {
+public class MeasurementListActivity extends AppCompatActivity implements OnItemClickListener {
 
     public static final String TAG = "MeasurementListFragment";
 

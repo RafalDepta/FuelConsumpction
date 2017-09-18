@@ -14,7 +14,7 @@ import pl.depta.rafal.fuelconsumpction.R;
 import pl.depta.rafal.fuelconsumpction.databinding.ActivityAddMeasurementBinding;
 import pl.depta.rafal.fuelconsumpction.ui.addmeasurement.viewmodel.AddMeasurementViewModel;
 
-public class AddMeasurement extends AppCompatActivity implements LifecycleRegistryOwner {
+public class AddMeasurement extends AppCompatActivity {
 
 /*    @BindView(R.id.measurement_distance)
     TextInputEditText measurementDistance;
