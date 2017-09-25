@@ -50,11 +50,11 @@ public class MeasurementListViewModel extends ViewModel {
         }
     }
 
-    private static class InsertMeasurement extends AsyncTask<MeasurementEntity, Void, Void> {
+    public static class InsertMeasurement extends AsyncTask<MeasurementEntity, Void, Void> {
 
         private AppDatabase db;
 
-        InsertMeasurement(AppDatabase appDatabase) {
+        public InsertMeasurement(AppDatabase appDatabase) {
             db = appDatabase;
         }
 
